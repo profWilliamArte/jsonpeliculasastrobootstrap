@@ -1,0 +1,18 @@
+{
+  "name": "apipeliculasbootstrap",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "astro": "^4.3.7",
+    "astro-bootstrap": "^0.6.2",
+    "gh-pages": "^6.1.1"
+  }
+}

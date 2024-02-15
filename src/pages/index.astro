@@ -1,0 +1,28 @@
+---
+import Layout from '../layout/Layout.astro';
+import Tendencias from '../components/Tendencias.astro';
+import MenuLat from '../components/MenuLat.astro';
+import Peliculas from '../components/Peliculas.astro';
+---
+<Layout pagina="Home">
+	<div class="container-fluid bg-tendencias">
+		<Tendencias/>
+		<div class="row bg-peliculas">
+			<div class="col-md-4 col-lg-3 col-xl-2  text-white-50 text-center bg-dark">
+				<MenuLat/>
+			</div>
+			<div class="col-md-8 col-lg-9 col-xl-10 ">
+				<Peliculas/>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.bg-tendencias{
+		background-color: #3498db;
+	}
+	.bg-peliculas{
+		background-color: #2980b9;
+	}
+</style>

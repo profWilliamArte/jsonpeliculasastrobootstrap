@@ -1,0 +1,55 @@
+---
+import Layout from '../../layout/Layout.astro';
+import peliculas from '../../datos/peliculas.json';
+export function getStaticPaths() {
+
+  const ids = peliculas.reduce((arregloIds, pelicula) => {
+    arregloIds.push(pelicula.id);
+    return arregloIds;
+  }, []);
+  // Genera un objeto de ruta para cada ID
+  const paths = ids.map((id) => ({
+    params: { id: id.toString() },
+  }));
+
+  return paths;
+}
+let id = parseInt(Astro.params.id)
+const pelicula = peliculas.find((pelicula) => pelicula.id === id);
+let fecha = new Date(pelicula.release_date);
+let fechaFormateada = fecha.toLocaleDateString();
+const ruta="../peliculas/"
+
+---
+<Layout pagina="Home">
+	<div class="container bg-tendencias">
+		<h3 class="text-center py-5">Detalle de la Pelicula</h3>
+    <div class="card p-3">
+      <div class="row">
+        <div class="col-md-4">
+            <img src={ruta+pelicula.poster_path} alt="pelicula" class="img-fluid img-thumbnail">
+        </div>
+        <div class="col-md-8">
+            <h3>{pelicula.title}</h3>
+            <h5>
+                <b>Idioma original: </b>{pelicula.original_language}<br/>
+                <b>Fecha de Lanzamiento: </b>{fechaFormateada}<br/>
+                <b>Popularidad: </b>{pelicula.popularity}<br/>
+                <b>Average: </b><span class="badge rounded-pill bg-danger"  >{pelicula.vote_average}</span><br/>
+              
+            </h5>
+            <p>    
+                <b>Descripción: </b>
+                {pelicula.overview}
+
+            </p>
+            <a href="/" class="btn btn-info btn-sm ">Regresar</a>
+        </div>
+      </div>
+    </div>
+	</div>
+</Layout>
+<script>
+
+</script>
+

@@ -1,0 +1,21 @@
+---
+import 'bootstrap/dist/css/bootstrap.css';
+import Nav from '../components/Nav.astro';
+const {pagina}=Astro.props;
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pagina}</title>
+	</head>
+	<body>
+		<Nav/>
+        <slot/>
+
+    <script src="bootstrap/dist/js/bootstrap.bundle.js"></script>
+	</body>
+</html>

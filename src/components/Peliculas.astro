@@ -1,0 +1,156 @@
+---
+import DetalleModal from '../components/DetalleModal.astro';
+---
+<h3 class="text-center text-white-50 py-3 slide-in-blurred-top" id="titulo">Pelicula</h3>
+<div class="row " id="mostrarPeliculas"></div>
+<DetalleModal/>
+
+<style>
+    img{
+        border-radius: 5px 5px 0 0;
+    }
+
+  
+</style>
+<script>
+    const mostrarPeliculasEl= document.querySelector("#mostrarPeliculas");
+    const mostrarTendenciasEl=document.querySelector("#mostrarTendencias");
+    const menulateralEl     = document.querySelector("#menulateral");
+    const menusuperiorEl    = document.querySelector("#menusuperior");
+    const tituloEl          = document.querySelector("#titulo");
+    const mostrarDetalleEl  = document.querySelector("#mostrarDetalle");
+
+    import peliculas from '../datos/peliculas.json';
+    const peliculasFiltrados = peliculas.filter((pelicula) => pelicula.genre_ids.includes(28));
+    const ruta="peliculas/"
+    const det="detalle/"
+
+    
+    renderPeliculas(peliculasFiltrados,"Acción")
+
+    function renderPeliculas(peliculasFiltrados=[],genero=""){
+        tituloEl.innerHTML=`Peliculas de Genero ${genero} (${peliculasFiltrados.length})`
+        let valor="";
+        peliculasFiltrados.map((item)=>(
+        valor+=
+        `
+        <div class="col-md-4 col-lg-3 col-xl-2 mb-3 ">
+            <div class="card  h-100">
+                <div class="card-header p-0">
+                    <img src=${ruta+item.poster_path} alt="pelicula" class="img-fluid">
+                </div>
+                <div class="card-body text-center">
+                    <p>${item.title}</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="javascript" 
+                        class="btn btn-danger btn-sm d-grid" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#exampleModal"
+                        id="${item.id}"
+                        >Detalle
+                    </a>
+                  
+
+                   
+                </div>
+                
+            </div>
+        </div>
+        `
+        ))
+        mostrarPeliculasEl.innerHTML=valor
+    
+    }
+    mostrarPeliculasEl.addEventListener("click", (e) => {
+        if (e.target instanceof HTMLAnchorElement) {
+            const id = parseInt(e.target.id);
+            renderDetalle(id);
+        }
+    });
+    /*
+    mostrarPeliculasEl.addEventListener("click",(e)=>{
+       
+        if (e.target && e.target.tagName === "A") {
+            const id = parseInt(e.target.id); 
+            renderDetalle(id)
+        }
+    })
+*/
+
+    menulateralEl.addEventListener("click",(e)=>{
+        e.preventDefault();
+        menu(e.target.id, e.target.dataset.name);
+    })
+    menusuperiorEl.addEventListener("click",(e)=>{
+        e.preventDefault();
+        menu(e.target.id, e.target.dataset.name);
+    })
+    function menu(idp="", name=""){
+       
+        let id=parseInt(idp)
+        let genero = name;
+        const peliculasFiltrados = peliculas.filter((pelicula) => pelicula.genre_ids.includes(id));
+        renderPeliculas(peliculasFiltrados,genero)
+    }
+
+    mostrarTendenciasEl.addEventListener("click",(e)=>{
+        if (e.target && e.target.tagName === "IMG") {
+            const id = parseInt(e.target.dataset.id);
+            renderDetalle(id)
+        }
+    })
+
+    function renderDetalle(id=""){
+            const idp=parseInt(id)
+            const pelicula = peliculas.find((pelicula) => pelicula.id == idp);
+            let fecha = new Date(pelicula.release_date);
+            let fechaFormateada = fecha.toLocaleDateString();
+            mostrarDetalleEl.innerHTML=
+            `
+            <div class="row">
+                <div class="col-md-5">
+                    <img src=${ruta+pelicula.poster_path} alt="pelicula" class="img-fluid img-thumbnail">
+                </div>
+                <div class="col-md-7">
+                    <h3>${pelicula.title}</h3>
+                    <h5>
+                        <b>Idioma original: </b>${pelicula.original_language}<br/>
+                        <b>Fecha de Lanzamiento: </b>${fechaFormateada}<br/>
+                        <b>Popularidad: </b>${pelicula.popularity}<br/>
+                        <b>Average: </b><span class="badge rounded-pill ${getColor(pelicula.vote_average)}">${pelicula.vote_average}</span><br/>
+                       
+                    </h5>
+                    <p>    
+                        <b>Descripción: </b>
+                        ${pelicula.overview}
+
+                    </p>
+
+                    <a href=${det+pelicula.id}
+                        class="btn btn-success btn-sm" 
+                        id="${pelicula.id}"
+                        >Ver mas
+                    </a>
+                </div>
+            </div>
+            `
+           
+     
+    }
+    function getColor(voto=1){
+    if(voto>=7.5){
+        return 'bg-success'
+    }else if(voto>=5){
+        return 'bg-warning'
+    }else{
+        return 'bg-danger'
+    }
+}
+
+</script>
+ 
+
+    
+
+

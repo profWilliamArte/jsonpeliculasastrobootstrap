@@ -1,0 +1,11 @@
+---
+import generos from '../datos/generos.json';
+---
+<div id="menusuperior">
+{
+    generos.map((item)=>(
+        <li><a class="dropdown-item" href="javascript" id={item.id.toString()} data-name={item.name}>{item.name}</a></li>
+    ))
+}
+</div>
+   

@@ -1,0 +1,13 @@
+---
+import generos from '../datos/generos.json';
+---
+<h4 class="text-center p-3">Generos</h4>
+<div id="menulateral">
+{
+    generos.map((item)=>(
+        <a href="javascript" class="btn btn-outline-danger d-grid mb-1" id={item.id.toString()} data-name={item.name}>{item.name}</a>
+    ))
+}
+</div>
+  
+   
