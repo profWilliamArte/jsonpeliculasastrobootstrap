@@ -16,4 +16,10 @@
       }
    });
 
+   https://www.testim.io/
+   https://applitools.com/
+   https://www.mabl.com/
+   https://www.sealights.io/about-sealights/
+   https://es.parasoft.com/solutions/ai-ml/
+
 

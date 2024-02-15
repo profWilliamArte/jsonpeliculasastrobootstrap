@@ -18,10 +18,10 @@ let id = parseInt(Astro.params.id)
 const pelicula = peliculas.find((pelicula) => pelicula.id === id);
 let fecha = new Date(pelicula.release_date);
 let fechaFormateada = fecha.toLocaleDateString();
-const ruta="../peliculas/"
+const ruta="/jsonpeliculasastrobootstrap/peliculas";
 
 ---
-<Layout pagina="Home">
+<Layout pagina="Detalle">
 	<div class="container bg-tendencias">
 		<h3 class="text-center py-5">Detalle de la Pelicula</h3>
     <div class="card p-3">
@@ -43,7 +43,7 @@ const ruta="../peliculas/"
                 {pelicula.overview}
 
             </p>
-            <a href="/" class="btn btn-info btn-sm ">Regresar</a>
+            <a href="/jsonpeliculasastrobootstrap/" class="btn btn-info btn-sm ">Regresar</a>
         </div>
       </div>
     </div>
