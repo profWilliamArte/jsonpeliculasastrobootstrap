@@ -22,8 +22,8 @@ import DetalleModal from '../components/DetalleModal.astro';
 
     import peliculas from '../datos/peliculas.json';
     const peliculasFiltrados = peliculas.filter((pelicula) => pelicula.genre_ids.includes(28));
-    const ruta="peliculas"
-    const det="detalle/"
+    const ruta="/jsonpeliculasastrobootstrap/peliculas"
+    const det="/jsonpeliculasastrobootstrap/detalle/"
 
     
     renderPeliculas(peliculasFiltrados,"Acción")
