@@ -1,0 +1,19 @@
+1) npm create astro@latest
+2) npm install bootstrap@latest
+    colocar esto en el Layout para integrar a bootstrap
+    import 'bootstrap/dist/css/bootstrap.css'; /*al inicio*/
+    <script src="bootstrap/dist/js/bootstrap.bundle.js"></script> /* al final*/
+
+3) npm i gh-pages
+4) agregar esta linea en el script 
+   "deploy": "gh-pages -d dist"
+5) en astro.config.mjs
+    export default defineConfig({
+      site: 'https://profwilliamarte.github.io',/* aqui colocarias el nombre de tu cuenta*/
+      base: '/jsonpeliculasastrobootstrap',/* aqui colocarias el nombre de tu repositorio*/
+      build: {
+         assets: 'astro' /// muy importante
+      }
+   });
+
+
